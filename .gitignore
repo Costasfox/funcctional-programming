@@ -1,0 +1,10 @@
+*.hi
+*.o
+*.dyn_hi
+*.dyn_o
+
+/build/
+
+# Include every file in exercises, including compiler output.
+!/exercises/
+!/exercises/**
