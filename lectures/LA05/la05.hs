@@ -43,4 +43,42 @@ filter' :: (a -> Bool) -> [a] -> [a]
 filter' _ [] = []
 filter' p (x:xs)
     | p x = x : filter' p xs 
-    | otherwise = filter' p xs 
+    | otherwise = filter' p xs
+
+-- Recursive Sorted List
+isSorted :: [Int] -> Bool
+isSorted [] = True
+isSorted [x] = True
+isSorted (x:y:xs)
+    | x <= y = isSorted (y:xs)
+    | otherwise = False
+
+--Recursive Insertion Sort
+insert :: Int -> [Int] -> [Int]
+insert x [] = [x]
+insert x (y:ys) 
+    | x <= y = x : y : ys
+    | otherwise = y : insert x ys
+
+
+--Recursive InsertionSort with Insert
+insertionSort :: [Int] -> [Int]
+insertionSort [] = []
+insertionSort (x:xs) = insert x (insertionSort xs)
+
+
+--Recursive Merge
+merge :: [Int] -> [Int] -> [Int]
+merge xs [] = xs
+merge [] ys = ys
+merge (x:xs) (y:ys)
+    | x <= y = x : merge xs (y:ys)
+    | otherwise = y : merge (x:xs) ys
+
+-- Recursive MergeSort
+mergeSort :: [Int] -> [Int]
+mergeSort [] = []
+mergeSort [x] = [x]
+mergeSort xs = merge (mergeSort left) (mergeSort right)
+    where
+        (left,right) = splitAt (length xs `div` 2) xs
